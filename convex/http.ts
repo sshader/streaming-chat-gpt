@@ -6,7 +6,7 @@ import { Doc, Id } from "./_generated/dataModel";
 
 const http = httpRouter();
 
-export function hasDelimeter(response: string) {
+function hasDelimiter(response: string) {
   return (
     response.includes("\n") ||
     response.includes(".") ||
@@ -52,15 +52,14 @@ http.route({
           ],
           stream: true,
         });
+
         // loop over the data as it is streamed and write to the writeable
         // also periodically update the message in the database
-        let partsProcessed = 0;
-
         for await (const part of stream) {
           const text = part.choices[0]?.delta?.content || "";
           content += text;
           await writer.write(textEncoder.encode(text));
-          if (hasDelimeter(text)) {
+          if (hasDelimiter(text)) {
             await ctx.runMutation(internal.messages.update, {
               messageId,
               body: content,

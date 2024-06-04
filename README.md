@@ -1,4 +1,4 @@
-# Streaming Chat Completions
+# Streaming Chat Completions With HTTP Actions
 
 An example of streaming ChatGPT via the OpenAI v4.0 node SDK built off of [this repo](https://github.com/ianmacartney/streaming-chat-gpt)
 with [this accompanying Stack post](https://stack.convex.dev/gpt-streaming-with-persistent-reactivity).
